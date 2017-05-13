@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Menu de Opções</title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="conteudo">
+
+			<h1>Menu de Opções</h1>
+			<h:form>
+				<ul>
+					<li><h:commandLink value="Cadastro de Usuários"
+							action="cadUsuarios" /></li>
+					<li><h:commandLink value="Cadastro de Livros"
+							action="cadLivros" /></li>
+					<li><h:commandLink value="Lista de Livros"
+							action="listaLivros" /></li>
+					<li><h:commandLink value="Cadastro de Compradores"
+							action="cadCompradores" /></li>							
+				</ul>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

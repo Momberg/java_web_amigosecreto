@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Cadastro de Usuários</title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="conteudo">
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h2>
+							<p:outputLabel value="Cadastro de Usuários" />
+						</h2>
+					</f:facet>
+					<p:outputLabel for="nome" value="Usuário:" />
+					<p:inputText id="nome" value="#{cadastroUsuariosBean.usuario.nome}" required="true"/>
+
+					<p:outputLabel for="password" value="Senha:" />
+					<p:password id="password" value="#{cadastroUsuariosBean.usuario.senha}" feedback="true" required="true"/>
+
+					<p:outputLabel value="Nível:" />
+					<p:selectOneMenu value="#{cadastroUsuariosBean.usuario.nivel}">
+						<f:selectItems value="#{cadastroUsuariosBean.niveis}" var="n"
+							itemLabel="#{n.descricao}" itemValue="#{n.codigo}" />
+					</p:selectOneMenu>
+					<p:outputLabel />
+					<p:commandButton action="#{cadastroUsuariosBean.incluirUsuario}"
+						value="Incluir"
+						process="@form"
+						update="growl"/>
+				</p:panelGrid>
+<!-- 				<p:messages showSummary="true" showDetail="true"></p:messages> -->
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
