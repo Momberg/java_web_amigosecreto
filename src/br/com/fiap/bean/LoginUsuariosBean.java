@@ -43,4 +43,8 @@ public class LoginUsuariosBean {
 			return "/index";
 		}
 	}
+	
+	public String cadastrar() {
+		return "/admin/cadPessoa";
+	}
 }

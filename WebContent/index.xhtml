@@ -19,8 +19,8 @@
 			<p:outputLabel value="Senha:" />
 			<p:password value="#{loginUsuarios.usuario.senha}" />
 			
-			<p:outputLabel />
-			<p:commandButton  action="#{loginUsuarios.validarUsuario}" value="Validar" />
+			<p:commandButton  action="#{loginUsuarios.validarUsuario}" value="Logar" />
+			<p:commandButton  action="#{loginUsuarios.cadastrar}" value="Cadastar" />
 		</p:panelGrid>
 		<p:messages showSummary="true" showDetail="true"></p:messages>
 	</h:form>
