@@ -6,42 +6,42 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import br.com.fiap.entity.Livros;
+import br.com.fiap.entity.Grupos;
 
-public class LivrosDao {
+public class GruposDao {
 	Session session = null;
 	Transaction transaction = null;
 	
-    public String salvar(Livros livro){
+    public String salvar(Grupos grupo){
     	try{
     		session = HibernateUtil.getSessionFactory().getCurrentSession();
     		transaction = session.beginTransaction();
-    		session.save(livro);
+    		session.save(grupo);
     		transaction.commit();
     		
-    		return "Livro salvo";
+    		return "grupo salvo";
     	}catch(Exception e){
     		return e.getMessage();
     	}
     }
     
-    public Livros buscar(Integer id){
+    public Grupos buscar(Integer id){
     	session = HibernateUtil.getSessionFactory().getCurrentSession();
     	transaction = session.beginTransaction();
-    	Livros livro = (Livros)session.load(Livros.class, id);
+    	Grupos grupo = (Grupos)session.load(Grupos.class, id);
     	transaction.commit();
     	
-    	return livro;
+    	return grupo;
     }    
     
     
 	@SuppressWarnings("unchecked")
-	public List<Livros> listar(){
-		List<Livros> lista = null;
+	public List<Grupos> listar(){
+		List<Grupos> lista = null;
 		try {
     		session = HibernateUtil.getSessionFactory().getCurrentSession();
     		transaction = session.beginTransaction();
-    		Query q = session.createQuery("FROM Livros");
+    		Query q = session.createQuery("FROM grupos");
     		lista = q.list();
     		transaction.commit();
     		

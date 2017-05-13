@@ -7,13 +7,13 @@
 	<session-factory>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/servletjsp</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/amigosecreto</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">fiap</property>
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<mapping class="br.com.fiap.entity.Usuarios"/>
-		<mapping class="br.com.fiap.entity.Livros"/>
+		<mapping class="br.com.fiap.entity.Grupos"/>
 		<mapping class="br.com.fiap.entity.Compradores"/>		
 	</session-factory>
 </hibernate-configuration>
