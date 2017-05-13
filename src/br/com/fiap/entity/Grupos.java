@@ -41,16 +41,20 @@ public class Grupos {
 	@Column(name="DATA")
 	private String dataSorteio;
 	
+	@Column(name="NUM_PESSOAS")
+	private Integer num_pessoas;
+	
 	/*@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="livro")
 	private Set<Compradores> compradores = new LinkedHashSet<Compradores>();*/
 	
 	public Grupos() {}
 	
-	public Grupos(Integer id, String nome, String local, String data) throws ParseException{
+	public Grupos(Integer id, String nome, String local, String data, Integer num_pessoas) throws ParseException{
 		setId(id);
 		setNome(nome);
 		setLocal(local);
 		setDataSorteio(data);
+		setNum_pessoas(num_pessoas);
 	}
 
 	public String getNome() {
@@ -83,6 +87,14 @@ public class Grupos {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getNum_pessoas() {
+		return num_pessoas;
+	}
+
+	public void setNum_pessoas(Integer num_pessoas) {
+		this.num_pessoas = num_pessoas;
 	}
 
 	public String getCadastro(){

@@ -30,6 +30,9 @@
 
 					<p:outputLabel for="local" value="#{msg.local_sort}" />
 					<p:inputText id="local" value="#{gruposBean.grupo.local}" required="true"/>
+					
+					<p:outputLabel for="num_pessoas" value="#{msg.num_pessoas}" />
+					<p:inputNumber id="num_pessoas" value="#{gruposBean.grupo.num_pessoas}" required="true"/>
 
 					<p:outputLabel />
 					<p:commandButton action="#{gruposBean.incluirGrupo}"
