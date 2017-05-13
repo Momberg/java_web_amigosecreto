@@ -1,5 +1,10 @@
 package br.com.fiap.entity;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+@ManagedBean(name="pessBean")
+@RequestScoped
 public class Pessoa {
 	
 	private String cpf;

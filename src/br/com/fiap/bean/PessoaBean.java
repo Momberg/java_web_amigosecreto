@@ -1,14 +1,16 @@
 package br.com.fiap.bean;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.fiap.entity.Pessoa;
 
-@ManagedBean(name="pessBean")
+@ManagedBean
 @RequestScoped
 public class PessoaBean {
 	
+	@ManagedProperty(value = "#{pessBean}")
 	private Pessoa pessoa;
 
 	public Pessoa getPessoa() {
