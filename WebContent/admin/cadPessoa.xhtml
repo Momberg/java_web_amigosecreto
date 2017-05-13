@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Cadastro de Pessoas</title>
+	<title>Cadastrar de Pessoaa</title>
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
@@ -16,80 +16,25 @@
 				<p:panelGrid columns="2">
 					<f:facet name="header">
 						<h2>
-							<p:outputLabel value="Cadastro de Livros" />
+							<p:outputLabel value="Cadastrar de Pessoa" />
 						</h2>
 					</f:facet>
-					<p:outputLabel for="codigo" value="#{msg.codigo}" />
-					<p:inputText id="codigo" value="#{livrosBean.livro.codigo}" required="true"/>
+					<p:outputLabel for="cpf" value="Cpf" />
+					<p:inputText id="cpf" value="#{pessBean.pessoa.cpf}" required="true"/>
 
-					<p:outputLabel for="titulo" value="#{msg.titulo}" />
-					<p:inputText id="titulo" value="#{livrosBean.livro.titulo}" required="true"/>
+					<p:outputLabel for="nome" value="Nome" />
+					<p:inputText id="nome" value="#{pessBean.pessoa.nome}" required="true"/>
 
-					<p:outputLabel for="autor" value="#{msg.autor}" />
-					<p:inputText id="autor" value="#{livrosBean.livro.autor}" required="true"/>
+					<p:outputLabel for="email" value="Email" />
+					<p:inputText id="email" value="#{pessBean.pessoa.email}" required="true"/>
 
-					<p:outputLabel for="data" value="#{msg.data}" />
-					<p:calendar id="data" value="#{livrosBean.livro.dataPublicacao}" 
-					pattern="dd/MM/yyyy"
-					showOn="button"
-					required="true"/>
 
-					<p:outputLabel for="preco" value="#{msg.preco}" />
-					<p:inputText id="preco" value="#{livrosBean.livro.preco}" required="true"/>
-
-					<p:outputLabel />
-					<p:commandButton action="#{livrosBean.incluirLivro}"
-						value="Incluir" 
-						process="@form"
-						update="growl :tabela"/>
-				</p:panelGrid>
-<!-- 				<p:messages showSummary="true" showDetail="true"></p:messages> -->
-			</h:form>
 			
-			<h:form id="tabela">
-				<p:dataTable value="#{livrosBean.listaLivros}" var="book"
-					styleClass="tabela" headerClass="cabecalho"
-					columnClasses="col1,col2,col3,col4">
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="CODIGO" />
-						</f:facet>
-						<p:outputLabel value="#{book.codigo}" />
-					</p:column>
+					<p:outputLabel />
+					<p:commandButton action="#{pessBean.cadastrar}"
+						value="Cadastrar" />
+				</p:panelGrid>
 
-					<p:column>
-						<f:facet name="header">
-							<p:outputLabel value="TITULO" />
-						</f:facet>
-						<p:outputLabel value="#{book.titulo}" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<p:outputLabel value="AUTOR" />
-						</f:facet>
-						<p:outputLabel value="#{book.autor}" />
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<p:outputLabel value="DATA PUB." />
-						</f:facet>
-						<p:outputLabel value="#{book.dataPublicacao}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</p:outputLabel>
-					</p:column>
-
-					<p:column>
-						<f:facet name="header">
-							<p:outputLabel value="PREÇO" />
-						</f:facet>
-						<p:outputLabel value="#{book.preco}">
-							<f:convertNumber type="currency" locale="pt_BR" />
-						</p:outputLabel>
-					</p:column>
-
-				</p:dataTable>
 			</h:form>
 			
 		</ui:define>
