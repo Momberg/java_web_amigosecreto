@@ -33,7 +33,9 @@
 
 					<p:outputLabel />
 					<p:commandButton action="#{gruposBean.incluirGrupo}"
-						value="Incluir"/>
+						value="Incluir"
+						process="@form"
+						update="growl"/>
 				</p:panelGrid>
 <!-- 				<p:messages showSummary="true" showDetail="true"></p:messages> -->
 			</h:form>

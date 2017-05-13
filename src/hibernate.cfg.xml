@@ -13,7 +13,6 @@
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<mapping class="br.com.fiap.entity.Usuarios"/>
-		<mapping class="br.com.fiap.entity.Grupos"/>
-		<mapping class="br.com.fiap.entity.Compradores"/>		
+		<mapping class="br.com.fiap.entity.Grupos"/>	
 	</session-factory>
 </hibernate-configuration>
