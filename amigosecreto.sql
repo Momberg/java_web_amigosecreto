@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `amigosecreto` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `amigosecreto`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: amigosecreto
 -- ------------------------------------------------------
--- Server version	5.5.53-log
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,57 +16,32 @@ USE `amigosecreto`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `compradores`
+-- Table structure for table `grupos`
 --
 
-DROP TABLE IF EXISTS `compradores`;
+DROP TABLE IF EXISTS `grupos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `compradores` (
-  `CODIGO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODLIVRO` int(11) DEFAULT NULL,
-  `NOME` varchar(45) DEFAULT NULL,
-  `EMAIL` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO`),
-  KEY `FK_LIVRO_COMP_idx` (`CODLIVRO`),
-  CONSTRAINT `FK_LIVRO_COMP` FOREIGN KEY (`CODLIVRO`) REFERENCES `livros` (`CODIGO`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `grupos` (
+  `idgrupo` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `local` varchar(45) NOT NULL,
+  `data` varchar(45) NOT NULL,
+  `num_pessoas` int(11) NOT NULL,
+  `cod_grupo` varchar(45) NOT NULL,
+  `cpf_usuario` varchar(45) NOT NULL,
+  PRIMARY KEY (`idgrupo`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `compradores`
+-- Dumping data for table `grupos`
 --
 
-LOCK TABLES `compradores` WRITE;
-/*!40000 ALTER TABLE `compradores` DISABLE KEYS */;
-/*!40000 ALTER TABLE `compradores` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `livros`
---
-
-DROP TABLE IF EXISTS `livros`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `livros` (
-  `CODIGO` int(10) NOT NULL,
-  `TITULO` varchar(45) NOT NULL,
-  `AUTOR` varchar(45) NOT NULL,
-  `DATAPUB` datetime NOT NULL,
-  `PRECO` double NOT NULL,
-  PRIMARY KEY (`CODIGO`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `livros`
---
-
-LOCK TABLES `livros` WRITE;
-/*!40000 ALTER TABLE `livros` DISABLE KEYS */;
-INSERT INTO `livros` VALUES (100,'Um tour pelo JSF','Emilio','2015-06-17 00:00:00',89),(200,'Nada como férias','Gerson','2015-06-17 00:00:00',15);
-/*!40000 ALTER TABLE `livros` ENABLE KEYS */;
+LOCK TABLES `grupos` WRITE;
+/*!40000 ALTER TABLE `grupos` DISABLE KEYS */;
+INSERT INTO `grupos` VALUES (1,'teste','fiap','Thu May 18 00:00:00 BRT 2017',0,'',''),(2,'teste2','fiap','Thu May 18 00:00:00 BRT 2017',0,'',''),(3,'28SCJ','FIAP','Wed May 24 00:00:00 BRT 2017',0,'',''),(4,'28SCJ','FIAP','Thu May 25 00:00:00 BRT 2017',12,'',''),(5,'Teste','Teste','Thu May 25 00:00:00 BRT 2017',30,'9852',''),(6,'Teste2','Teste2','Thu May 25 00:00:00 BRT 2017',30,'4340','');
+/*!40000 ALTER TABLE `grupos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -80,11 +53,9 @@ DROP TABLE IF EXISTS `pessoas`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pessoas` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CPF` varchar(45) DEFAULT NULL,
-  `NOME` varchar(45) DEFAULT NULL,
-  `EMAIL` varchar(45) DEFAULT NULL,
-  `SENHA` varchar(45) DEFAULT NULL,
-  `NIVEL` int(11) DEFAULT NULL,
+  `CPF` varchar(45) NOT NULL,
+  `NIVEL` int(11) NOT NULL,
+  `cod_grupo` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -107,14 +78,14 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `EMAIL` varchar(20) NOT NULL,
+  `EMAIL` varchar(45) NOT NULL,
   `SENHA` varchar(20) NOT NULL,
   `NIVEL` int(11) DEFAULT NULL,
   `NOME` varchar(45) DEFAULT NULL,
   `CPF` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `EMAIL_UNIQUE` (`EMAIL`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +94,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'fiap','123',1,NULL,NULL),(2,'scj','123',1,NULL,NULL),(3,'alexandre@gmail.com','66708589',0,'Alexandre Dias de Lima','40319606899'),(4,'ale','4444',0,'ale','222'),(5,'1','1',0,'1','1'),(6,'aaa','aaa',0,'Alexandre','333'),(7,'aa','aa',0,'aa','aa');
+INSERT INTO `usuarios` VALUES (1,'fiap','123',1,NULL,NULL),(2,'scj','123',1,NULL,NULL),(3,'alexandre@gmail.com','66708589',0,'Alexandre Dias de Lima','40319606899'),(4,'ale','4444',0,'ale','222'),(5,'1','1',0,'1','1'),(6,'aaa','aaa',0,'Alexandre','333'),(7,'aa','aa',0,'aa','aa'),(8,'gabrielduartemomberg@gmail.com','1234',0,'Gabriel Duarte Momberg','43081408890');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-13 22:54:16
+-- Dump completed on 2017-05-14 14:22:24
