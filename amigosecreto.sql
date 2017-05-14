@@ -30,8 +30,9 @@ CREATE TABLE `grupos` (
   `num_pessoas` int(11) NOT NULL,
   `cod_grupo` varchar(45) NOT NULL,
   `cpf_usuario` varchar(45) NOT NULL,
+  `sorteado` int(11) NOT NULL,
   PRIMARY KEY (`idgrupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +41,7 @@ CREATE TABLE `grupos` (
 
 LOCK TABLES `grupos` WRITE;
 /*!40000 ALTER TABLE `grupos` DISABLE KEYS */;
-INSERT INTO `grupos` VALUES (1,'teste','fiap','Thu May 18 00:00:00 BRT 2017',0,'',''),(2,'teste2','fiap','Thu May 18 00:00:00 BRT 2017',0,'',''),(3,'28SCJ','FIAP','Wed May 24 00:00:00 BRT 2017',0,'',''),(4,'28SCJ','FIAP','Thu May 25 00:00:00 BRT 2017',12,'',''),(5,'Teste','Teste','Thu May 25 00:00:00 BRT 2017',30,'9852',''),(6,'Teste2','Teste2','Thu May 25 00:00:00 BRT 2017',30,'4340','');
+INSERT INTO `grupos` VALUES (1,'teste','fiap','Thu May 18 00:00:00 BRT 2017',0,'','',0),(2,'teste2','fiap','Thu May 18 00:00:00 BRT 2017',0,'','',0),(3,'28SCJ','FIAP','Wed May 24 00:00:00 BRT 2017',0,'','',0),(4,'28SCJ','FIAP','Thu May 25 00:00:00 BRT 2017',12,'','',0),(5,'Teste','Teste','Thu May 25 00:00:00 BRT 2017',30,'9852','',0),(6,'Teste2','Teste2','Thu May 25 00:00:00 BRT 2017',30,'4340','',0),(7,'Momberg\'s','Casa','Wed May 24 00:00:00 BRT 2017',100,'9409','43081408890',0),(8,'teste','teste','Fri May 12 00:00:00 BRT 2017',12,'15461','43081408890',0),(9,'teste2','teste2','Thu May 25 00:00:00 BRT 2017',200,'20673','43081408890',0),(10,'teste3','teste3','Thu May 25 00:00:00 BRT 2017',300,'79115','43081408890',0),(11,'teste','teste','Mon May 15 00:00:00 BRT 2017',12,'80819','43081408890',0),(12,'teste','teste','Mon May 15 00:00:00 BRT 2017',12,'41810','43081408890',0),(13,'teste','teste','Mon May 15 00:00:00 BRT 2017',12,'7378','43081408890',0),(14,'teste','teste','Mon May 15 00:00:00 BRT 2017',12,'1171','43081408890',0),(15,'teste','teste','Tue May 02 00:00:00 BRT 2017',12,'63675','43081408890',0),(16,'a','a','Wed May 10 00:00:00 BRT 2017',2,'47778','43081408890',0);
 /*!40000 ALTER TABLE `grupos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,10 +55,10 @@ DROP TABLE IF EXISTS `pessoas`;
 CREATE TABLE `pessoas` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `CPF` varchar(45) NOT NULL,
-  `NIVEL` int(11) NOT NULL,
   `cod_grupo` varchar(45) NOT NULL,
+  `nome_sorteado` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +67,7 @@ CREATE TABLE `pessoas` (
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
+INSERT INTO `pessoas` VALUES (1,'43081408890','63675',NULL),(2,'43081408890','47778',NULL);
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,4 +109,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-14 14:22:24
+-- Dump completed on 2017-05-14 19:25:15
