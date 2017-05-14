@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+CREATE DATABASE  IF NOT EXISTS `amigosecreto` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `amigosecreto`;
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: servletjsp
+-- Host: localhost    Database: amigosecreto
 -- ------------------------------------------------------
--- Server version	5.6.22-log
+-- Server version	5.5.53-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -70,6 +72,33 @@ INSERT INTO `livros` VALUES (100,'Um tour pelo JSF','Emilio','2015-06-17 00:00:0
 UNLOCK TABLES;
 
 --
+-- Table structure for table `pessoas`
+--
+
+DROP TABLE IF EXISTS `pessoas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pessoas` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CPF` varchar(45) DEFAULT NULL,
+  `NOME` varchar(45) DEFAULT NULL,
+  `EMAIL` varchar(45) DEFAULT NULL,
+  `SENHA` varchar(45) DEFAULT NULL,
+  `NIVEL` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pessoas`
+--
+
+LOCK TABLES `pessoas` WRITE;
+/*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -78,11 +107,14 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `USUARIO` varchar(20) NOT NULL,
+  `EMAIL` varchar(20) NOT NULL,
   `SENHA` varchar(20) NOT NULL,
   `NIVEL` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `NOME` varchar(45) DEFAULT NULL,
+  `CPF` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `EMAIL_UNIQUE` (`EMAIL`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +123,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'fiap','123',1),(2,'scj','123',1);
+INSERT INTO `usuarios` VALUES (1,'fiap','123',1,NULL,NULL),(2,'scj','123',1,NULL,NULL),(3,'alexandre@gmail.com','66708589',0,'Alexandre Dias de Lima','40319606899'),(4,'ale','4444',0,'ale','222'),(5,'1','1',0,'1','1'),(6,'aaa','aaa',0,'Alexandre','333'),(7,'aa','aa',0,'aa','aa');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -104,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-17 22:54:43
+-- Dump completed on 2017-05-13 22:54:16
