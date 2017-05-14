@@ -41,7 +41,7 @@ public class GruposDao {
 		try {
     		session = HibernateUtil.getSessionFactory().getCurrentSession();
     		transaction = session.beginTransaction();
-    		Query q = session.createQuery("FROM grupos");
+    		Query q = session.createQuery("FROM Grupos");
     		lista = q.list();
     		transaction.commit();
     		

@@ -29,7 +29,7 @@ public class Grupos {
 
 	@Id
 	@GeneratedValue
-	@Column(name="ID")
+	@Column(name="IDGRUPO")
 	private Integer id;
 	
 	@Column(name="NOME")
