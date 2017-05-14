@@ -31,6 +31,7 @@ public class LoginUsuariosBean {
 	public String validarUsuario() throws Exception{
 		UsuariosDao dao = RepositoryDao.getUsuariosDao();
 		if(dao.validar(usuario)){
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
 			return "/admin/menu";
 		}
 		else {
