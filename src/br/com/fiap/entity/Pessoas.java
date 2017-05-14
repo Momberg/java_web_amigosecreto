@@ -2,18 +2,33 @@ package br.com.fiap.entity;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @ManagedBean(name="pessBean")
 @RequestScoped
-public class Pessoa {
+public class Pessoas {
 	
+	@Id
+	@GeneratedValue
+	@Column(name="ID")
 	private String id;
+	
+	@Column(name="CPF")
 	private String cpf;
+	
+	@Column(name="NOME")
 	private String nome;
+	
+	@Column(name="EMAIL")
 	private String email;
+	
+	@Column(name="SENHA")
 	private String senha;
+	
+	@Column(name="NIVEL")
 	private int nivel;
-	private String nomePessoaSorteada;
 	
 	public String getNome() {
 		return nome;
@@ -29,14 +44,6 @@ public class Pessoa {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public int getNivel() {
@@ -61,14 +68,6 @@ public class Pessoa {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getNomePessoaSorteada() {
-		return nomePessoaSorteada;
-	}
-
-	public void setNomePessoaSorteada(String nomePessoaSorteada) {
-		this.nomePessoaSorteada = nomePessoaSorteada;
 	}
 
 }

@@ -44,17 +44,22 @@ public class Grupos {
 	@Column(name="NUM_PESSOAS")
 	private Integer num_pessoas;
 	
-	/*@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER,mappedBy="livro")
-	private Set<Compradores> compradores = new LinkedHashSet<Compradores>();*/
+	@Column(name="COD_GRUPO")
+	private String cod_grupo;
+	
+	@Column(name="CPF_USUARIO")
+	private String cpf_usuario;
 	
 	public Grupos() {}
 	
-	public Grupos(Integer id, String nome, String local, String data, Integer num_pessoas) throws ParseException{
+	public Grupos(Integer id, String nome, String local, String data, Integer num_pessoas, String cod_grupo, String cpf_usuario) throws ParseException{
 		setId(id);
 		setNome(nome);
 		setLocal(local);
 		setDataSorteio(data);
 		setNum_pessoas(num_pessoas);
+		setCod_grupo(cod_grupo);
+		setCpf_usuario(cpf_usuario);
 	}
 
 	public String getNome() {
@@ -95,6 +100,22 @@ public class Grupos {
 
 	public void setNum_pessoas(Integer num_pessoas) {
 		this.num_pessoas = num_pessoas;
+	}
+	
+	public String getCod_grupo() {
+		return cod_grupo;
+	}
+
+	public void setCod_grupo(String cod_grupo) {
+		this.cod_grupo = cod_grupo;
+	}
+
+	public String getCpf_usuario() {
+		return cpf_usuario;
+	}
+
+	public void setCpf_usuario(String cpf_usuario) {
+		this.cpf_usuario = cpf_usuario;
 	}
 
 	public String getCadastro(){

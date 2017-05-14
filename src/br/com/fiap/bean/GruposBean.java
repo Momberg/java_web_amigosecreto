@@ -10,14 +10,19 @@ import javax.faces.context.FacesContext;
 
 import br.com.fiap.dao.GruposDao;
 import br.com.fiap.entity.Grupos;
+import br.com.fiap.entity.Usuarios;
 import br.com.fiap.repository.RepositoryDao;
 
 @ManagedBean
 @RequestScoped
 public class GruposBean {
-
+	
 	@ManagedProperty(value = "#{beanGrupo}")
 	private Grupos grupo;
+	
+	private LoginUsuariosBean user;
+	
+	private int cod_grupo;
 
 	public Grupos getGrupo() {
 		return grupo;
@@ -32,6 +37,9 @@ public class GruposBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
 		try {
+			cod_grupo = (int) (Math.random() * 9999);
+			grupo.setCod_grupo(String.valueOf(cod_grupo));
+			grupo.setCpf_usuario(user.getUsuario().getCpf());
 			GruposDao dao = RepositoryDao.getGruposDao();
 			dao.salvar(grupo);
 			msg.setSummary("OK");
@@ -50,5 +58,5 @@ public class GruposBean {
 	public List<Grupos> getListaGrupos() throws Exception {
 		return RepositoryDao.getGruposDao().listar();
 	}
-
+	
 }

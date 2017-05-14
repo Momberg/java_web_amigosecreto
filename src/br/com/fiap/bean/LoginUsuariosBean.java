@@ -2,6 +2,7 @@ package br.com.fiap.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -12,7 +13,7 @@ import br.com.fiap.repository.RepositoryDao;
 @ManagedBean(name="loginUsuarios")
 @SessionScoped
 public class LoginUsuariosBean {
-
+	
 	private Usuarios usuario;
 
 	public LoginUsuariosBean(){
@@ -47,4 +48,5 @@ public class LoginUsuariosBean {
 	public String cadastrar() {
 		return "/admin/cadPessoa";
 	}
+	
 }
