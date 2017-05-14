@@ -49,4 +49,16 @@ public class GruposDao {
 		}    	
 		return lista;
     }
+	
+	public Grupos pesquisarGrupo(String cod) {
+		
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+    	transaction = session.beginTransaction();
+    	
+    	Query q =  session.createQuery("FROM Grupos WHERE cod_grupo=:codigo");
+    	q.setParameter("codigo", cod);
+    	
+    	return (Grupos)q.uniqueResult();
+		
+	}
 }

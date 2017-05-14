@@ -25,6 +25,7 @@ public class GruposBean {
 	private Usuarios usuario;
 	private int cod_grupo;
 	private Pessoas pessoa;
+	private String cod_pesquisa;
 	
 	public Grupos getGrupo() {
 		return grupo;
@@ -64,6 +65,30 @@ public class GruposBean {
 
 	public List<Grupos> getListaGrupos() throws Exception {
 		return RepositoryDao.getGruposDao().listar();
+	}
+	
+	public void pesquisarGrupo() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		GruposDao dao = RepositoryDao.getGruposDao();
+		grupo = dao.pesquisarGrupo(cod_pesquisa);
+		
+		if(grupo == null) {
+			FacesMessage msg = new FacesMessage();
+			msg.setDetail("Esse grupo nao existe");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, msg);
+		}
+		
+	}
+
+	public String getCod_pesquisa() {
+		return cod_pesquisa;
+	}
+
+	public void setCod_pesquisa(String cod_pesquisa) {
+		this.cod_pesquisa = cod_pesquisa;
 	}
 	
 }
