@@ -31,8 +31,7 @@ public class PessoasDao {
     	session = HibernateUtil.getSessionFactory().getCurrentSession();
     	transaction = session.beginTransaction();
     	
-    	Query q =  session.createQuery("FROM Pessoas WHERE email=:pessoa AND cpf=:cpf");
-    	q.setParameter("pessoa", pessoa.getEmail());
+    	Query q =  session.createQuery("FROM Pessoas WHERE cpf=:cpf");
     	q.setParameter("cpf", pessoa.getCpf());
     	return ((Pessoas)q.uniqueResult() != null);
     }

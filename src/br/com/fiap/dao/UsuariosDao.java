@@ -36,4 +36,15 @@ public class UsuariosDao {
     	q.setParameter("senha", usuario.getSenha());
     	return ((Usuarios)q.uniqueResult() != null);
     }
+    
+    public Usuarios getUsuario(Usuarios usuario){
+    	session = HibernateUtil.getSessionFactory().getCurrentSession();
+    	transaction = session.beginTransaction();
+    	
+    	Query q =  session.createQuery("FROM Usuarios WHERE email=:usuario AND senha=:senha");
+    	q.setParameter("usuario", usuario.getEmail());
+    	q.setParameter("senha", usuario.getSenha());
+    	usuario = (Usuarios) q.uniqueResult();
+    	return usuario;
+    }
 }

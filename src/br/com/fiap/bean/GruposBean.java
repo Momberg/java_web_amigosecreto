@@ -9,7 +9,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.fiap.dao.GruposDao;
+import br.com.fiap.dao.PessoasDao;
 import br.com.fiap.entity.Grupos;
+import br.com.fiap.entity.Pessoas;
 import br.com.fiap.entity.Usuarios;
 import br.com.fiap.repository.RepositoryDao;
 
@@ -19,11 +21,11 @@ public class GruposBean {
 	
 	@ManagedProperty(value = "#{beanGrupo}")
 	private Grupos grupo;
-	
-	private LoginUsuariosBean user;
-	
-	private int cod_grupo;
 
+	private Usuarios usuario;
+	private int cod_grupo;
+	private Pessoas pessoa;
+	
 	public Grupos getGrupo() {
 		return grupo;
 	}
@@ -37,15 +39,20 @@ public class GruposBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
 		try {
-			cod_grupo = (int) (Math.random() * 9999);
+			cod_grupo = (int) (Math.random() * 99999) + 1000;
 			grupo.setCod_grupo(String.valueOf(cod_grupo));
-			grupo.setCpf_usuario(user.getUsuario().getCpf());
+			usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+			grupo.setCpf_usuario(usuario.getCpf());
 			GruposDao dao = RepositoryDao.getGruposDao();
 			dao.salvar(grupo);
+			pessoa = new Pessoas();
+			pessoa.setCod_grupo(grupo.getCod_grupo());
+			pessoa.setCpf(usuario.getCpf());
+			PessoasDao daoP = RepositoryDao.getPessoasDao();
+			daoP.salvar(pessoa);
 			msg.setSummary("OK");
 			msg.setDetail("Grupo " + grupo.getNome() + " incluído");
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
-
 		} catch (Exception e) {
 
 			msg.setSummary("ERRO:");

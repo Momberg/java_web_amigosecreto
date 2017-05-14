@@ -3,9 +3,13 @@ package br.com.fiap.entity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="pessoas", schema="amigosecreto")
 @ManagedBean(name="pessBean")
 @RequestScoped
 public class Pessoas {
@@ -18,42 +22,20 @@ public class Pessoas {
 	@Column(name="CPF")
 	private String cpf;
 	
-	@Column(name="NOME")
-	private String nome;
+	@Column(name="COD_GRUPO")
+	private String cod_grupo;
 	
-	@Column(name="EMAIL")
-	private String email;
+	@Column(name="NOME_SORTEADO")
+	private String nome_sorteado;
 	
-	@Column(name="SENHA")
-	private String senha;
+	public Pessoas() {}
+
+	public Pessoas(String cpf, String cod_grupo, String nome_sorteado){
+		setCpf(cpf);
+		setCod_grupo(cod_grupo);
+		setNome_sorteado(nome_sorteado);
+	}
 	
-	@Column(name="NIVEL")
-	private int nivel;
-	
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public int getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
-
 	public String getCpf() {
 		return cpf;
 	}
@@ -68,6 +50,22 @@ public class Pessoas {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getCod_grupo() {
+		return cod_grupo;
+	}
+
+	public void setCod_grupo(String cod_grupo) {
+		this.cod_grupo = cod_grupo;
+	}
+
+	public String getNome_sorteado() {
+		return nome_sorteado;
+	}
+
+	public void setNome_sorteado(String nome_sorteado) {
+		this.nome_sorteado = nome_sorteado;
 	}
 
 }

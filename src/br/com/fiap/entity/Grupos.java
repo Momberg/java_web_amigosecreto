@@ -50,9 +50,12 @@ public class Grupos {
 	@Column(name="CPF_USUARIO")
 	private String cpf_usuario;
 	
+	@Column(name="SORTEADO")
+	private int sorteado;
+	
 	public Grupos() {}
 	
-	public Grupos(Integer id, String nome, String local, String data, Integer num_pessoas, String cod_grupo, String cpf_usuario) throws ParseException{
+	public Grupos(Integer id, String nome, String local, String data, Integer num_pessoas, String cod_grupo, String cpf_usuario, int sortado) throws ParseException{
 		setId(id);
 		setNome(nome);
 		setLocal(local);
@@ -60,6 +63,7 @@ public class Grupos {
 		setNum_pessoas(num_pessoas);
 		setCod_grupo(cod_grupo);
 		setCpf_usuario(cpf_usuario);
+		setSorteado(sortado);
 	}
 
 	public String getNome() {
@@ -116,6 +120,14 @@ public class Grupos {
 
 	public void setCpf_usuario(String cpf_usuario) {
 		this.cpf_usuario = cpf_usuario;
+	}
+	
+	public int getSorteado() {
+		return sorteado;
+	}
+
+	public void setSorteado(int sorteado) {
+		this.sorteado = sorteado;
 	}
 
 	public String getCadastro(){

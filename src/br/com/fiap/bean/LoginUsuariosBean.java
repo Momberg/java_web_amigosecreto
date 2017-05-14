@@ -31,10 +31,10 @@ public class LoginUsuariosBean {
 	public String validarUsuario() throws Exception{
 		UsuariosDao dao = RepositoryDao.getUsuariosDao();
 		if(dao.validar(usuario)){
+			usuario = dao.getUsuario(usuario);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
 			return "/admin/menu";
-		}
-		else {
+		} else {
 			FacesContext context = FacesContext.getCurrentInstance();
 			FacesMessage msg = new FacesMessage();
 			msg.setSummary("Erro Login: ");
