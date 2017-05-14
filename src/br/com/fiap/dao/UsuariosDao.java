@@ -31,8 +31,8 @@ public class UsuariosDao {
     	session = HibernateUtil.getSessionFactory().getCurrentSession();
     	transaction = session.beginTransaction();
     	
-    	Query q =  session.createQuery("FROM Usuarios WHERE nome=:usuario AND senha=:senha");
-    	q.setParameter("usuario", usuario.getNome());
+    	Query q =  session.createQuery("FROM Usuarios WHERE email=:usuario AND senha=:senha");
+    	q.setParameter("usuario", usuario.getEmail());
     	q.setParameter("senha", usuario.getSenha());
     	return ((Usuarios)q.uniqueResult() != null);
     }

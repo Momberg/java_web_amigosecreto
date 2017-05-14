@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import br.com.fiap.dao.UsuariosDao;
 
 @Entity
-@Table(name="usuarios", schema="servletjsp")
+@Table(name="usuarios", schema="amigosecreto")
 @ManagedBean(name="beanUsuario")
 @RequestScoped
 public class Usuarios implements Serializable{
@@ -23,14 +23,20 @@ public class Usuarios implements Serializable{
 	@Column(name="ID")
 	private Integer Id;
 	
-	@Column(name="USUARIO")
-	private String nome;
+	@Column(name="EMAIL")
+	private String email;
 	
 	@Column(name="SENHA")
 	private String senha;
 	
 	@Column(name="NIVEL")
 	private int nivel;
+	
+	@Column(name="NOME")
+	private String nome;
+	
+	@Column(name="CPF")
+	private String cpf;
 
 	
 	public Usuarios() {}
@@ -72,6 +78,22 @@ public class Usuarios implements Serializable{
 		} catch (Exception e) {
 			return "ERRO: " + e.getMessage();
 		}
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	
 }

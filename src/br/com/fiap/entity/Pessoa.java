@@ -7,11 +7,13 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class Pessoa {
 	
+	private String id;
 	private String cpf;
 	private String nome;
 	private String email;
 	private String senha;
 	private int nivel;
+	private String nomePessoaSorteada;
 	
 	public String getNome() {
 		return nome;
@@ -51,6 +53,22 @@ public class Pessoa {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getNomePessoaSorteada() {
+		return nomePessoaSorteada;
+	}
+
+	public void setNomePessoaSorteada(String nomePessoaSorteada) {
+		this.nomePessoaSorteada = nomePessoaSorteada;
 	}
 
 }

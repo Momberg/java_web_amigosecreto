@@ -1,5 +1,6 @@
 package br.com.fiap.bean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class CadastroUsuariosBean {
 	}
 	
 	//action
-	public void incluirUsuario(){
+	public String incluirUsuario(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
 		try {
@@ -47,6 +48,8 @@ public class CadastroUsuariosBean {
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);			
 		}
 		context.addMessage(null, msg);
+		
+		return "/index";
 	}
 	
 	public List<Nivel> getNiveis(){

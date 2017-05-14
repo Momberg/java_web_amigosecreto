@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Cadastrar de Pessoaa</title>
+	<title>Cadastrar Usuario</title>
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
@@ -16,23 +16,25 @@
 				<p:panelGrid columns="2">
 					<f:facet name="header">
 						<h2>
-							<p:outputLabel value="Cadastrar de Pessoa" />
+							<p:outputLabel value="Cadastrar Usuario" />
 						</h2>
 					</f:facet>
 					<p:outputLabel for="cpf" value="Cpf" />
-					<p:inputText id="cpf" value="#{pessoaBean.pessoa.cpf}" required="true"/>
+					<p:inputText id="cpf" value="#{cadastroUsuariosBean.usuario.cpf}" required="true"/>
 
 					<p:outputLabel for="nome" value="Nome" />
-					<p:inputText id="nome" value="#{pessoaBean.pessoa.nome}" required="true"/>
-
+					<p:inputText id="nome" value="#{cadastroUsuariosBean.usuario.nome}" required="true"/>
+					
 					<p:outputLabel for="email" value="Email" />
-					<p:inputText id="email" value="#{pessoaBean.pessoa.email}" required="true"/>
-
-
-			
+					<p:inputText id="email" value="#{cadastroUsuariosBean.usuario.email}" required="true"/>
+					
+					<p:outputLabel for="senha" value="Senha" />
+					<p:inputText id="senha" value="#{cadastroUsuariosBean.usuario.senha}" required="true"/>
+					
 					<p:outputLabel />
-					<p:commandButton action="#{pessoaBean.cadastrar}"
+					<p:commandButton action="#{cadastroUsuariosBean.incluirUsuario}"
 						value="Cadastrar" />
+						
 				</p:panelGrid>
 
 			</h:form>
