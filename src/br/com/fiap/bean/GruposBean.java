@@ -75,22 +75,12 @@ public class GruposBean {
 		
 		grupo = buscarGrupo();
 		
-		PessoasDao daoP = RepositoryDao.getPessoasDao();
-		pessoas = daoP.listar(usuario);
-		for (Pessoas pessoafor : pessoas) {
-			if(pessoafor.getCod_grupo().equals(grupo.getCod_grupo())){
-				pessoa.setCod_grupo(grupo.getCod_grupo());
-				pessoa.setCpf(usuario.getCpf());
-			}
-		}
 		if(grupo == null) {
 			FacesMessage msg = new FacesMessage();
 			msg.setDetail("Esse grupo nao existe");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context.addMessage(null, msg);
 		}
-		
-		
 	}
 	
 	public void participarGrupo() {
@@ -99,27 +89,36 @@ public class GruposBean {
 		FacesMessage msg = new FacesMessage();
 		
 		if(buscarGrupo() != null) {
-		
-		PessoasDao dao = RepositoryDao.getPessoasDao();
-		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-		pessoas = dao.listar(usuario);
-		for (Pessoas pessoafor : pessoas) {
-			if(pessoafor.getCod_grupo().equals(grupo.getCod_grupo())){
-				pessoa.setCod_grupo(grupo.getCod_grupo());
+			PessoasDao dao = RepositoryDao.getPessoasDao();
+			usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+			pessoas = dao.listar(usuario);
+			boolean temGrupo = false;
+				for (Pessoas pessoafor : pessoas) {
+					if(pessoafor.getCod_grupo().equals(cod_pesquisa)){
+						temGrupo = true;
+					}
+				}
+			
+			if(temGrupo) {
+				msg.setDetail("Usuario já foi incluido ao grupo");
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			}else {
+				pessoa = new Pessoas();
+				pessoa.setCod_grupo(cod_pesquisa);
 				pessoa.setCpf(usuario.getCpf());
-				dao.update(pessoa);
+				PessoasDao daoP = RepositoryDao.getPessoasDao();
+				daoP.salvar(pessoa);
+				
+				msg.setSummary("");
+				msg.setDetail("Usuario " + usuario.getNome()+" " + "incluido com sucesso ao grupo"  );
+				msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			}
-		}
-		if(pessoa == null){
-			msg.setDetail("Erro ao tentar participar do grupo");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, msg);
-		}
+			
 		}else {
 			msg.setDetail("Grupo não existe");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, msg);
 		}
+		context.addMessage(null, msg);
 	}
 
 	public String getCod_pesquisa() {
