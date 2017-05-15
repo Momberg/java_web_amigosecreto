@@ -14,7 +14,6 @@
 			<h:form prependId="false">
 			
 				<p:growl id="growl" showDetail="true" sticky="true" />
-				<p:messages showSummary="true" showDetail="true" id="mensagem" />
 				<p:panelGrid columns="2">
 					<f:facet name="header">
 						<h2>
@@ -26,8 +25,7 @@
 
 					<p:commandButton action="#{gruposBean.pesquisarGrupo}" id="pesquisar"
 						value="Pesquisar" process="@form" update="growl :tabela"/>
-						<p:commandButton action="#{gruposBean.participarGrupo}" id="participar" process="@form" update="growl :mensagem"
-											value="Participar"/>
+						<p:commandButton action="menu" value="Voltar" immediate="true"/>
 				</p:panelGrid>
 			</h:form>
 			
