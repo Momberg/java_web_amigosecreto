@@ -126,6 +126,19 @@ public class GruposBean {
 
 	public void setPessoa(Pessoas pessoa) {
 		this.pessoa = pessoa;
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		GruposDao dao = RepositoryDao.getGruposDao();
+		grupo = dao.pesquisarGrupo(cod_pesquisa);
+		
+		if(grupo == null) {
+			FacesMessage msg = new FacesMessage();
+			msg.setDetail("Esse grupo nao existe");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, msg);
+		}
+		
 	}
-	
+
 }
