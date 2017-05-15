@@ -25,9 +25,9 @@
 					<p:outputLabel />
 					<p:commandButton action="#{gruposBean.pesquisarGrupo}"
 						value="Pesquisar" process="@form" update="growl :tabela"/>
-						
+						<p:commandButton action="#{gruposBean.participarGrupo}" 
+											value="Participar"/>
 				</p:panelGrid>
-
 			</h:form>
 			
 			<h:form id="tabela">
@@ -75,7 +75,6 @@
 						</p:dataTable>
 				</h:panelGroup>
 			</h:form>
-			
 			
 		</ui:define>
 	</ui:composition>

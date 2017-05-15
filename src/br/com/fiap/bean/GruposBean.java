@@ -95,8 +95,16 @@ public class GruposBean {
 		System.out.println("participarGrupo");
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
-		PessoasDao dao = new PessoasDao();
-		dao.update(pessoa);
+		PessoasDao dao = RepositoryDao.getPessoasDao();
+		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		pessoas = dao.listar(usuario);
+		for (Pessoas pessoafor : pessoas) {
+			if(pessoafor.getCod_grupo().equals(grupo.getCod_grupo())){
+				pessoa.setCod_grupo(grupo.getCod_grupo());
+				pessoa.setCpf(usuario.getCpf());
+				dao.update(pessoa);
+			}
+		}
 		if(pessoa == null){
 			msg.setDetail("Erro ao tentar participar do grupo");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
