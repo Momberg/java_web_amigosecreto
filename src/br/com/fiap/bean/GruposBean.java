@@ -121,6 +121,24 @@ public class GruposBean {
 		context.addMessage(null, msg);
 	}
 
+	public void sortearGrupo() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage msg = new FacesMessage();
+		
+		if(buscarGrupo() != null) {
+			List<Pessoas> listaPessoas = buscarPessoaPorGrupo();
+			
+			System.out.println(listaPessoas);
+			
+		} else {
+			msg.setDetail("Grupo não existe");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		}
+		context.addMessage(null, msg);
+		
+	}
+	
 	public String getCod_pesquisa() {
 		return cod_pesquisa;
 	}
@@ -164,6 +182,12 @@ public class GruposBean {
 		grupo = dao.pesquisarGrupo(cod_pesquisa);
 		
 		return grupo;
+	}
+	
+	private List<Pessoas> buscarPessoaPorGrupo() {
+		
+		PessoasDao pessoaDao = RepositoryDao.getPessoasDao();
+		return pessoaDao.listarPessoaPorGrupo(cod_pesquisa);
 	}
 
 }

@@ -70,4 +70,18 @@ public class PessoasDao {
 		return lista;
     }
     
+    public List<Pessoas> listarPessoaPorGrupo(String cod) {
+    	List<Pessoas> lista = null;
+    	session = HibernateUtil.getSessionFactory().getCurrentSession();
+		transaction = session.beginTransaction();
+		Query q = session.createQuery("FROM Pessoas WHERE cod_grupo=:codigo");
+		q.setParameter("codigo", cod);
+		lista = q.list();
+		transaction.commit();
+    	
+		return lista;
+    }
+    
+    
+    
 }

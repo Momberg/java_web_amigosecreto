@@ -31,9 +31,11 @@
 					<p:outputLabel for="senha" value="Senha" />
 					<p:inputText id="senha" value="#{cadastroUsuariosBean.usuario.senha}" required="true"/>
 					
-					<p:outputLabel />
 					<p:commandButton action="#{cadastroUsuariosBean.incluirUsuario}"
 						value="Cadastrar" />
+						
+						<p:commandButton action="/index.faces"
+						value="Voltar" immediate="true" />
 						
 				</p:panelGrid>
 
