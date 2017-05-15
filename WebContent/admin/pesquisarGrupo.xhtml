@@ -11,8 +11,10 @@
 <h:body>
 	<ui:composition template="layout.xhtml">
 		<ui:define name="conteudo">
-			<h:form>
+			<h:form prependId="false">
+			
 				<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:messages showSummary="true" showDetail="true" id="mensagem" />
 				<p:panelGrid columns="2">
 					<f:facet name="header">
 						<h2>
@@ -22,10 +24,9 @@
 					<p:outputLabel for="codigo" value="Digite o Código" />
 					<p:inputText id="codigo" value="#{gruposBean.cod_pesquisa}" required="true"/>
 
-					<p:outputLabel />
-					<p:commandButton action="#{gruposBean.pesquisarGrupo}"
+					<p:commandButton action="#{gruposBean.pesquisarGrupo}" id="pesquisar"
 						value="Pesquisar" process="@form" update="growl :tabela"/>
-						<p:commandButton action="#{gruposBean.participarGrupo}" 
+						<p:commandButton action="#{gruposBean.participarGrupo}" id="participar" process="@form" update="growl :mensagem"
 											value="Participar"/>
 				</p:panelGrid>
 			</h:form>
@@ -63,15 +64,6 @@
 								<p:outputLabel value="#{grupo.dataSorteio}" />
 							</p:column>
 							
-							<p:column>
-							<f:facet name="header">
-								<h:outputText value="Participar do Sorteio "/>
-							</f:facet>
-							<p:commandButton action="#{gruposBean.participarGrupo}" 
-											value="Participar" rendered="#{not empty gruposBean.grupo.cpf_usuario 
-													and gruposBean.pessoa.cod_grupo == gruposBean.grupo.cod_grupo
-													and gruposBean.pessoa.cpf == gruposBean.usuario.cpf}"/>
-							</p:column>
 						</p:dataTable>
 				</h:panelGroup>
 			</h:form>

@@ -72,8 +72,9 @@ public class GruposBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		pessoa = new Pessoas();
-		GruposDao dao = RepositoryDao.getGruposDao();
-		grupo = dao.pesquisarGrupo(cod_pesquisa);
+		
+		grupo = buscarGrupo();
+		
 		PessoasDao daoP = RepositoryDao.getPessoasDao();
 		pessoas = daoP.listar(usuario);
 		for (Pessoas pessoafor : pessoas) {
@@ -89,12 +90,16 @@ public class GruposBean {
 			context.addMessage(null, msg);
 		}
 		
+		
 	}
 	
 	public void participarGrupo() {
 		System.out.println("participarGrupo");
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
+		
+		if(buscarGrupo() != null) {
+		
 		PessoasDao dao = RepositoryDao.getPessoasDao();
 		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		pessoas = dao.listar(usuario);
@@ -107,6 +112,11 @@ public class GruposBean {
 		}
 		if(pessoa == null){
 			msg.setDetail("Erro ao tentar participar do grupo");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, msg);
+		}
+		}else {
+			msg.setDetail("Grupo não existe");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context.addMessage(null, msg);
 		}
@@ -147,6 +157,14 @@ public class GruposBean {
 			context.addMessage(null, msg);
 		}
 		
+	}
+	
+	private Grupos buscarGrupo () {
+		
+		GruposDao dao = RepositoryDao.getGruposDao();
+		grupo = dao.pesquisarGrupo(cod_pesquisa);
+		
+		return grupo;
 	}
 
 }
