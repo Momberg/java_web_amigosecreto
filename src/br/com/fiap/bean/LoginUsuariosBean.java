@@ -5,6 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import br.com.fiap.dao.UsuariosDao;
 import br.com.fiap.entity.Usuarios;
@@ -49,5 +50,14 @@ public class LoginUsuariosBean {
 	public String cadastrar() {
 		return "/admin/cadPessoa";
 	}
+	
+	public String excluirSessao() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		session.removeAttribute("usuario");
+		return "/index.faces";
+		
+	}
+	
+
 	
 }
