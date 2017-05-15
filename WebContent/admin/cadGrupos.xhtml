@@ -11,7 +11,7 @@
 <h:body>
 	<ui:composition template="layout.xhtml">
 		<ui:define name="conteudo">
-			<h:form>
+			<h:form prependId="false">
 				<p:growl id="growl" showDetail="true" sticky="true" />
 				<p:panelGrid columns="2">
 					<f:facet name="header">
@@ -38,13 +38,13 @@
 					<p:commandButton action="#{gruposBean.incluirGrupo}"
 						value="Incluir"
 						process="@form"
-						update="growl"/>
+						update="growl :msg"/>
 						
 						<p:commandButton action="menu" immediate="true"
 						value="Voltar"/>
 						
 				</p:panelGrid>
-<!-- 				<p:messages showSummary="true" showDetail="true"></p:messages> -->
+				<p:messages id="msg" showSummary="true" showDetail="true"></p:messages> 
 			</h:form>
 			
 		</ui:define>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Sortear Grupo</title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="conteudo">
+			<h:form prependId="false">
+			
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h2>
+							<p:outputLabel value="Sortear do Grupo" />
+						</h2>
+					</f:facet>
+					<p:outputLabel for="codigo" value="Digite o Código" />
+					<p:inputText id="codigo" value="#{gruposBean.cod_pesquisa}" required="true"/>
+
+					
+						<p:commandButton action="#{gruposBean.sortearGrupo}" process="@form" update="growl :msg"
+											value="Sortear"/>
+						<p:commandButton action="menu" value="Voltar" immediate="true"/>
+				</p:panelGrid>
+				<p:messages showSummary="true" showDetail="true" id="msg" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

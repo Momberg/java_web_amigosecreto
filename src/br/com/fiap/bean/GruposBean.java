@@ -53,7 +53,7 @@ public class GruposBean {
 			PessoasDao daoP = RepositoryDao.getPessoasDao();
 			daoP.salvar(pessoa);
 			msg.setSummary("OK");
-			msg.setDetail("Grupo " + grupo.getNome() + " incluído");
+			msg.setDetail("Grupo " + grupo.getNome() + " incluído" + ", " +"favor guardar código do grupo " + grupo.getCod_grupo());
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 		} catch (Exception e) {
 
