@@ -28,12 +28,16 @@ public class Pessoas {
 	@Column(name="NOME_SORTEADO")
 	private String nome_sorteado;
 	
+	@Column(name="PARTICIPANDO")
+	private int participando;
+	
 	public Pessoas() {}
 
-	public Pessoas(String cpf, String cod_grupo, String nome_sorteado){
+	public Pessoas(String cpf, String cod_grupo, String nome_sorteado, int participando){
 		setCpf(cpf);
 		setCod_grupo(cod_grupo);
 		setNome_sorteado(nome_sorteado);
+		setParticipando(participando);
 	}
 	
 	public String getCpf() {
@@ -68,4 +72,12 @@ public class Pessoas {
 		this.nome_sorteado = nome_sorteado;
 	}
 
+	public int getParticipando() {
+		return participando;
+	}
+
+	public void setParticipando(int participando) {
+		this.participando = participando;
+	}
+	
 }

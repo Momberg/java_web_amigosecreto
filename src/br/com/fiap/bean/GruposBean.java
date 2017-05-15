@@ -25,6 +25,8 @@ public class GruposBean {
 	private Usuarios usuario;
 	private int cod_grupo;
 	private Pessoas pessoa;
+	private String cod_pesquisa;
+	private List<Pessoas> pessoas;
 	
 	public Grupos getGrupo() {
 		return grupo;
@@ -64,6 +66,66 @@ public class GruposBean {
 
 	public List<Grupos> getListaGrupos() throws Exception {
 		return RepositoryDao.getGruposDao().listar();
+	}
+	
+	public void pesquisarGrupo() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		pessoa = new Pessoas();
+		GruposDao dao = RepositoryDao.getGruposDao();
+		grupo = dao.pesquisarGrupo(cod_pesquisa);
+		PessoasDao daoP = RepositoryDao.getPessoasDao();
+		pessoas = daoP.listar(usuario);
+		for (Pessoas pessoafor : pessoas) {
+			if(pessoafor.getCod_grupo().equals(grupo.getCod_grupo())){
+				pessoa.setCod_grupo(grupo.getCod_grupo());
+				pessoa.setCpf(usuario.getCpf());
+			}
+		}
+		if(grupo == null) {
+			FacesMessage msg = new FacesMessage();
+			msg.setDetail("Esse grupo nao existe");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, msg);
+		}
+		
+	}
+	
+	public void participarGrupo() {
+		System.out.println("participarGrupo");
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage msg = new FacesMessage();
+		PessoasDao dao = new PessoasDao();
+		dao.update(pessoa);
+		if(pessoa == null){
+			msg.setDetail("Erro ao tentar participar do grupo");
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, msg);
+		}
+	}
+
+	public String getCod_pesquisa() {
+		return cod_pesquisa;
+	}
+
+	public void setCod_pesquisa(String cod_pesquisa) {
+		this.cod_pesquisa = cod_pesquisa;
+	}
+
+	public Usuarios getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuarios usuario) {
+		this.usuario = usuario;
+	}
+
+	public Pessoas getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoas pessoa) {
+		this.pessoa = pessoa;
 	}
 	
 }

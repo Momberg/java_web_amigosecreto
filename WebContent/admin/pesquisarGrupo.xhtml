@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Pesquisar Grupo</title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="conteudo">
+			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h2>
+							<p:outputLabel value="Pesquisar Grupo" />
+						</h2>
+					</f:facet>
+					<p:outputLabel for="codigo" value="Digite o Código" />
+					<p:inputText id="codigo" value="#{gruposBean.cod_pesquisa}" required="true"/>
+
+					<p:outputLabel />
+					<p:commandButton action="#{gruposBean.pesquisarGrupo}"
+						value="Pesquisar" process="@form" update="growl :tabela"/>
+						
+				</p:panelGrid>
+
+			</h:form>
+			
+			<h:form id="tabela">
+			<p:messages showSummary="true" showDetail="true" />
+			<h:panelGroup rendered="#{gruposBean.grupo.nome != null}">
+					<p:dataTable value="#{gruposBean.grupo}" var="grupo"
+						styleClass="tabela" headerClass="cabecalho"
+						columnClasses="col1,col2,col3,col4">
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<p:outputLabel value="#{grupo.nome}" />
+						</p:column>
+							<p:column>
+							<f:facet name="header">
+								<h:outputText value="Local do Sorteio" />
+							</f:facet>
+							<p:outputLabel value="#{grupo.local}" />
+						</p:column>
+						
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="Status Sorteio" />
+								</f:facet>
+								<p:outputLabel value="Sorteio Pendente" />
+							</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Data Sorteio " />
+							</f:facet>
+							<p:outputLabel value="#{grupo.dataSorteio}" />
+						</p:column>
+						
+						<p:column>
+						<f:facet name="header">
+							<h:outputText value="Participar do Sorteio "/>
+						</f:facet>
+						<p:commandButton action="#{gruposBean.participarGrupo}" 
+										value="Participar" rendered="#{not empty gruposBean.grupo.cpf_usuario 
+												and gruposBean.pessoa.cod_grupo == gruposBean.grupo.cod_grupo
+												and gruposBean.pessoa.cpf == gruposBean.usuario.cpf}"/>
+						</p:column>
+						
+						</p:dataTable>
+				</h:panelGroup>
+			</h:form>
+			
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

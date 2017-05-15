@@ -10,7 +10,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.fiap.dao.GruposDao;
 import br.com.fiap.dao.UsuariosDao;
+import br.com.fiap.entity.Grupos;
 import br.com.fiap.entity.Usuarios;
 import br.com.fiap.model.Nivel;
 import br.com.fiap.repository.RepositoryDao;
