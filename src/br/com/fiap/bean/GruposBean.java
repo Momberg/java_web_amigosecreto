@@ -173,7 +173,6 @@ public class GruposBean {
 		for (Pessoas pessoas : listaPessoas) {
 			if(pessoas.getCpf().equals(usuario.getCpf())){
 				sorteado = buscaSorteado(pessoas);
-				System.out.println(sorteado.getNome());
 				if(pessoas.getCpf_sorteado() == null) {
 					msg.setDetail("Seu grupo ainda não realizou o sorteio");
 					msg.setSeverity(FacesMessage.SEVERITY_ERROR);

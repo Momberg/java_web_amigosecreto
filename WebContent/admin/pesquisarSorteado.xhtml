@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Pesquisar Grupo</title>
+	<title>Pesquisar Sorteado</title>
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
@@ -39,7 +39,7 @@
 								<f:facet name="header">
 									<h:outputText value="Nome do sorteado" />
 								</f:facet>
-								<p:outputLabel value="#{sorteado.nome}" />
+								<p:outputLabel value="#{gruposBean.sorteado.nome}" />
 							</p:column>
 						</p:dataTable>
 				</h:panelGroup>
