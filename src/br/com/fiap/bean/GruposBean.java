@@ -1,6 +1,7 @@
 package br.com.fiap.bean;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.fiap.dao.GruposDao;
 import br.com.fiap.dao.PessoasDao;
+import br.com.fiap.dao.UsuariosDao;
 import br.com.fiap.entity.Grupos;
 import br.com.fiap.entity.Pessoas;
 import br.com.fiap.entity.Usuarios;
@@ -27,6 +29,7 @@ public class GruposBean {
 	private Pessoas pessoa;
 	private String cod_pesquisa;
 	private List<Pessoas> pessoas;
+	private Usuarios sorteado;
 	
 	public Grupos getGrupo() {
 		return grupo;
@@ -125,18 +128,59 @@ public class GruposBean {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
-		
+		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		if(buscarGrupo() != null) {
 			List<Pessoas> listaPessoas = buscarPessoaPorGrupo();
-			
-			System.out.println(listaPessoas);
-			
+			List<Pessoas> listaSorteados = buscarPessoaPorGrupo();
+			Grupos grupo = buscarGrupo(listaPessoas.get(0).getCod_grupo(), usuario.getCpf());
+			if(grupo != null){
+				Random random = new Random();
+				int r;
+				boolean sort = false;
+				for (Pessoas pessoas : listaPessoas) {
+					while(!sort){
+						r = random.nextInt(listaPessoas.size());
+						if(pessoas.getCpf_sorteado() == null && listaPessoas.get(r).getCpf() != pessoas.getCpf()){
+							if(verificaListaSorteado(pessoas, listaSorteados, listaPessoas, r)){
+								pessoas.setCpf_sorteado(listaPessoas.get(r).getCpf());
+								atualizarSorteado(pessoas);
+								listaSorteados = buscarPessoaPorGrupo();
+								sort = true;
+							}
+						}
+					}
+					sort = false;
+				}
+				msg.setDetail("Grupo sorteado");
+				msg.setSeverity(FacesMessage.SEVERITY_INFO);
+			} else {
+				msg.setDetail("Você não é administrador do grupo para realizar o sorteio");
+				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			}
 		} else {
 			msg.setDetail("Grupo não existe");
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 		}
 		context.addMessage(null, msg);
 		
+	}
+	
+	public void pesquisarSorteado(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage msg = new FacesMessage();
+		List<Pessoas> listaPessoas = buscarPessoaPorGrupo();
+		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		for (Pessoas pessoas : listaPessoas) {
+			if(pessoas.getCpf().equals(usuario.getCpf())){
+				sorteado = buscaSorteado(pessoas);
+				System.out.println(sorteado.getNome());
+				if(pessoas.getCpf_sorteado() == null) {
+					msg.setDetail("Seu grupo ainda não realizou o sorteio");
+					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+					context.addMessage(null, msg);
+				}
+			}
+		}
 	}
 	
 	public String getCod_pesquisa() {
@@ -157,6 +201,14 @@ public class GruposBean {
 
 	public Pessoas getPessoa() {
 		return pessoa;
+	}
+
+	public Usuarios getSorteado() {
+		return sorteado;
+	}
+
+	public void setSorteado(Usuarios sorteado) {
+		this.sorteado = sorteado;
 	}
 
 	public void setPessoa(Pessoas pessoa) {
@@ -184,10 +236,39 @@ public class GruposBean {
 		return grupo;
 	}
 	
+	private Grupos buscarGrupo(String cod_grupo, String cpf){
+		GruposDao dao = RepositoryDao.getGruposDao();
+		grupo = dao.pesquisarGrupoAdmin(cod_grupo, cpf);
+		
+		return grupo;
+	}
+	
 	private List<Pessoas> buscarPessoaPorGrupo() {
 		
 		PessoasDao pessoaDao = RepositoryDao.getPessoasDao();
 		return pessoaDao.listarPessoaPorGrupo(cod_pesquisa);
 	}
+	
+	private void atualizarSorteado(Pessoas pessoa){
+		PessoasDao pessoaDao = RepositoryDao.getPessoasDao();
+		pessoaDao.update(pessoa);
+	}
+	
+	private boolean verificaListaSorteado(Pessoas pessoas, List<Pessoas> listaSorteados, List<Pessoas> listaPessoas, int r){
+		int i = 0;
+		while(i < listaSorteados.size() - 1){
+			if(listaSorteados.get(i).getCpf_sorteado() == listaPessoas.get(r).getCpf()){
+				return false;
+			}
+			i++;
+		}
+		return true;
+	}
 
+	private Usuarios buscaSorteado(Pessoas pessoa){
+		UsuariosDao usuarioDao = RepositoryDao.getUsuariosDao();
+		sorteado = usuarioDao.getUsuarioSorteado(pessoa);
+		return sorteado;
+	}
+	
 }

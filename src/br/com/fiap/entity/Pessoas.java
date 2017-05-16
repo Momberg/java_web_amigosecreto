@@ -25,18 +25,18 @@ public class Pessoas {
 	@Column(name="COD_GRUPO")
 	private String cod_grupo;
 	
-	@Column(name="NOME_SORTEADO")
-	private String nome_sorteado;
+	@Column(name="CPF_SORTEADO")
+	private String cpf_sorteado;
 	
 	@Column(name="PARTICIPANDO")
 	private int participando;
 	
 	public Pessoas() {}
 
-	public Pessoas(String cpf, String cod_grupo, String nome_sorteado, int participando){
+	public Pessoas(String cpf, String cod_grupo, String cpf_sorteado, int participando){
 		setCpf(cpf);
 		setCod_grupo(cod_grupo);
-		setNome_sorteado(nome_sorteado);
+		setCpf_sorteado(cpf_sorteado);
 		setParticipando(participando);
 	}
 	
@@ -64,12 +64,12 @@ public class Pessoas {
 		this.cod_grupo = cod_grupo;
 	}
 
-	public String getNome_sorteado() {
-		return nome_sorteado;
+	public String getCpf_sorteado() {
+		return cpf_sorteado;
 	}
 
-	public void setNome_sorteado(String nome_sorteado) {
-		this.nome_sorteado = nome_sorteado;
+	public void setCpf_sorteado(String cpf_sorteado) {
+		this.cpf_sorteado = cpf_sorteado;
 	}
 
 	public int getParticipando() {

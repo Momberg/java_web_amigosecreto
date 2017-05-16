@@ -4,6 +4,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import br.com.fiap.entity.Pessoas;
 import br.com.fiap.entity.Usuarios;
 
 public class UsuariosDao {
@@ -44,6 +45,16 @@ public class UsuariosDao {
     	Query q =  session.createQuery("FROM Usuarios WHERE email=:usuario AND senha=:senha");
     	q.setParameter("usuario", usuario.getEmail());
     	q.setParameter("senha", usuario.getSenha());
+    	usuario = (Usuarios) q.uniqueResult();
+    	return usuario;
+    }
+    
+    public Usuarios getUsuarioSorteado(Pessoas pessoa){
+    	Usuarios usuario;
+    	session = HibernateUtil.getSessionFactory().getCurrentSession();
+    	transaction = session.beginTransaction();
+    	Query q =  session.createQuery("FROM Usuarios WHERE cpf=:cpf");
+    	q.setParameter("cpf", pessoa.getCpf_sorteado());
     	usuario = (Usuarios) q.uniqueResult();
     	return usuario;
     }

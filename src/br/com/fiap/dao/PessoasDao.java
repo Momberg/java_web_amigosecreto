@@ -25,20 +25,6 @@ public class PessoasDao {
     		return e.getMessage();
     	}
     }
-    
-    public String update(Pessoas pessoa){
-    	try{
-    		session = HibernateUtil.getSessionFactory().getCurrentSession();
-    		Query query = session.createQuery("update Pessoas set participando = 1" +
-    				" where cpf = :cpf and cod_grupo = :cod_grupo");
-			query.setParameter("cpf", pessoa.getCpf());
-			query.setParameter("cod_grupo", pessoa.getCod_grupo());
-			query.executeUpdate();
-    		return "Pessoa atualizada";
-    	}catch(Exception e){
-    		return e.getMessage();
-    	}
-    }
 
     public Pessoas buscar(int id){
     	return (Pessoas)session.load(Pessoas.class, id);
@@ -82,6 +68,17 @@ public class PessoasDao {
 		return lista;
     }
     
+    public String update(Pessoas pessoa){
+    	try{
+    		session = HibernateUtil.getSessionFactory().getCurrentSession();
+    		Transaction t = session.beginTransaction();
+            session.update(pessoa);
+            t.commit();
+    		return "Pessoa atualizada";
+    	}catch(Exception e){
+    		return e.getMessage();
+    	}
+    }
     
     
 }

@@ -54,6 +54,7 @@ public class LoginUsuariosBean {
 	public String excluirSessao() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.removeAttribute("usuario");
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
 		return "/index.faces";
 		
 	}

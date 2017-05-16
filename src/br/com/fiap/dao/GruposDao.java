@@ -61,4 +61,17 @@ public class GruposDao {
     	return (Grupos)q.uniqueResult();
 		
 	}
+	
+	public Grupos pesquisarGrupoAdmin(String cod, String cpf) {
+		
+		session = HibernateUtil.getSessionFactory().getCurrentSession();
+    	transaction = session.beginTransaction();
+    	
+    	Query q =  session.createQuery("FROM Grupos WHERE cod_grupo=:codigo and cpf_usuario=:cpf");
+    	q.setParameter("codigo", cod);
+    	q.setParameter("cpf", cpf);
+    	
+    	return (Grupos)q.uniqueResult();
+		
+	}
 }
