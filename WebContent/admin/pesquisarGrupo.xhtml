@@ -52,7 +52,8 @@
 									<f:facet name="header">
 										<h:outputText value="Status Sorteio" />
 									</f:facet>
-									<p:outputLabel value="Sorteio Pendente" />
+									<p:outputLabel value="Sorteio Pendente" rendered="#{grupo.sorteado==0}" />
+									<p:outputLabel value="Sorteio Realizado" rendered="#{grupo.sorteado==1}" />
 								</p:column>
 							
 							<p:column>

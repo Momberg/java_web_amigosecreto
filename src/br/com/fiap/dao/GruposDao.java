@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.fiap.entity.Grupos;
+import br.com.fiap.entity.Pessoas;
 
 public class GruposDao {
 	Session session = null;
@@ -74,4 +75,17 @@ public class GruposDao {
     	return (Grupos)q.uniqueResult();
 		
 	}
+	
+	public String update(Grupos grupo){
+    	try{
+    		session = HibernateUtil.getSessionFactory().getCurrentSession();
+    		Transaction t = session.beginTransaction();
+            session.update(grupo);
+            t.commit();
+    		return "Grupo atualizado";
+    	}catch(Exception e){
+    		return e.getMessage();
+    	}
+    }
+	
 }

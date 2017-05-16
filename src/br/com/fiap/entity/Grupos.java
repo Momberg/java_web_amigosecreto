@@ -33,9 +33,6 @@ public class Grupos {
 	@Column(name="DATA")
 	private String dataSorteio;
 	
-	@Column(name="NUM_PESSOAS")
-	private Integer num_pessoas;
-	
 	@Column(name="COD_GRUPO")
 	private String cod_grupo;
 	
@@ -47,12 +44,11 @@ public class Grupos {
 	
 	public Grupos() {}
 	
-	public Grupos(Integer id, String nome, String local, String data, Integer num_pessoas, String cod_grupo, String cpf_usuario, int sortado) throws ParseException{
+	public Grupos(Integer id, String nome, String local, String data, String cod_grupo, String cpf_usuario, int sortado) throws ParseException{
 		setId(id);
 		setNome(nome);
 		setLocal(local);
 		setDataSorteio(data);
-		setNum_pessoas(num_pessoas);
 		setCod_grupo(cod_grupo);
 		setCpf_usuario(cpf_usuario);
 		setSorteado(sortado);
@@ -88,14 +84,6 @@ public class Grupos {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getNum_pessoas() {
-		return num_pessoas;
-	}
-
-	public void setNum_pessoas(Integer num_pessoas) {
-		this.num_pessoas = num_pessoas;
 	}
 	
 	public String getCod_grupo() {

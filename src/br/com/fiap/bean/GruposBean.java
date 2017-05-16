@@ -127,16 +127,16 @@ public class GruposBean {
 	public void sortearGrupo() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
+		Grupos grupo;
 		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 		if(buscarGrupo() != null) {
 			List<Pessoas> listaPessoas = buscarPessoaPorGrupo();
 			List<Pessoas> listaSorteados = buscarPessoaPorGrupo();
-			Grupos grupo = buscarGrupo(listaPessoas.get(0).getCod_grupo(), usuario.getCpf());
+			grupo = buscarGrupo(listaPessoas.get(0).getCod_grupo(), usuario.getCpf());
 			if(grupo != null){
 				Random random = new Random();
 				int r;
 				boolean sort = false;
-				boolean msg_sort = false;
 				for (Pessoas pessoas : listaPessoas) {
 					if(pessoas.getCpf_sorteado() == null){
 						while(!sort){
@@ -147,14 +147,15 @@ public class GruposBean {
 									atualizarSorteado(pessoas);
 									listaSorteados = buscarPessoaPorGrupo();
 									sort = true;
-									msg_sort = true;
 								}
 							}
 						}
 						sort = false;
 					}
 				}
-				if(msg_sort){
+				if(grupo.getSorteado() == 0){
+					grupo.setSorteado(1);
+					atualizaStatusGrupo(grupo);
 					msg.setDetail("Grupo sorteado");
 					msg.setSeverity(FacesMessage.SEVERITY_INFO);
 				} else {
@@ -281,6 +282,11 @@ public class GruposBean {
 		UsuariosDao usuarioDao = RepositoryDao.getUsuariosDao();
 		sorteado = usuarioDao.getUsuarioSorteado(pessoa);
 		return sorteado;
+	}
+	
+	private void atualizaStatusGrupo(Grupos grupo){
+		GruposDao gruposDao = RepositoryDao.getGruposDao();
+		gruposDao.update(grupo);
 	}
 	
 }
