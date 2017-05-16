@@ -255,8 +255,14 @@ public class GruposBean {
 	
 	private boolean verificaListaSorteado(Pessoas pessoas, List<Pessoas> listaSorteados, List<Pessoas> listaPessoas, int r){
 		int i = 0;
+		String sorteado;
 		while(i < listaSorteados.size() - 1){
-			if(listaSorteados.get(i).getCpf_sorteado() == listaPessoas.get(r).getCpf()){
+			if(listaSorteados.get(i).getCpf_sorteado() == null){
+				sorteado = "";
+			} else {
+				sorteado = listaSorteados.get(i).getCpf_sorteado();
+			}
+			if(sorteado.equals(listaPessoas.get(r).getCpf())){
 				return false;
 			}
 			i++;
