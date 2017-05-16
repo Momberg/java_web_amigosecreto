@@ -8,22 +8,26 @@
 	<title>Validação de usuários</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:panelGrid columns="2">
-			<f:facet name="header">
-				<h2><p:outputLabel value="Validação de Usuários" /></h2>
-			</f:facet>
-			<p:outputLabel value="Email:" />
-			<p:inputText value="#{loginUsuarios.usuario.email}" />
-
-			<p:outputLabel value="Senha:" />
-			<p:password value="#{loginUsuarios.usuario.senha}" />
-			
-			<p:commandButton  action="#{loginUsuarios.validarUsuario}" value="Logar" />
-			<p:commandButton  action="#{loginUsuarios.cadastrar}" value="Cadastar" />
-		</p:panelGrid>
-		<p:messages showSummary="true" showDetail="true"></p:messages>
-	</h:form>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="conteudo">
+			<h:form>
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h2><p:outputLabel value="Validação de Usuários" /></h2>
+					</f:facet>
+					<p:outputLabel value="Email:" />
+					<p:inputText value="#{loginUsuarios.usuario.email}" />
+		
+					<p:outputLabel value="Senha:" />
+					<p:password value="#{loginUsuarios.usuario.senha}" />
+					
+					<p:commandButton  action="#{loginUsuarios.validarUsuario}" value="Logar" />
+					<p:commandButton  action="#{loginUsuarios.cadastrar}" value="Cadastar" />
+					</p:panelGrid>
+					<p:messages showSummary="true" showDetail="true"></p:messages>
+			</h:form>
+		</ui:define>
+	</ui:composition>
 </h:body>
 
 </html>
