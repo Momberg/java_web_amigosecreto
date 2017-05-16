@@ -125,7 +125,6 @@ public class GruposBean {
 	}
 
 	public void sortearGrupo() {
-		
 		FacesContext context = FacesContext.getCurrentInstance();
 		FacesMessage msg = new FacesMessage();
 		usuario = (Usuarios)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
@@ -137,22 +136,31 @@ public class GruposBean {
 				Random random = new Random();
 				int r;
 				boolean sort = false;
+				boolean msg_sort = false;
 				for (Pessoas pessoas : listaPessoas) {
-					while(!sort){
-						r = random.nextInt(listaPessoas.size());
-						if(pessoas.getCpf_sorteado() == null && listaPessoas.get(r).getCpf() != pessoas.getCpf()){
-							if(verificaListaSorteado(pessoas, listaSorteados, listaPessoas, r)){
-								pessoas.setCpf_sorteado(listaPessoas.get(r).getCpf());
-								atualizarSorteado(pessoas);
-								listaSorteados = buscarPessoaPorGrupo();
-								sort = true;
+					if(pessoas.getCpf_sorteado() == null){
+						while(!sort){
+							r = random.nextInt(listaPessoas.size());
+							if(listaPessoas.get(r).getCpf() != pessoas.getCpf()){
+								if(verificaListaSorteado(pessoas, listaSorteados, listaPessoas, r)){
+									pessoas.setCpf_sorteado(listaPessoas.get(r).getCpf());
+									atualizarSorteado(pessoas);
+									listaSorteados = buscarPessoaPorGrupo();
+									sort = true;
+									msg_sort = true;
+								}
 							}
 						}
+						sort = false;
 					}
-					sort = false;
 				}
-				msg.setDetail("Grupo sorteado");
-				msg.setSeverity(FacesMessage.SEVERITY_INFO);
+				if(msg_sort){
+					msg.setDetail("Grupo sorteado");
+					msg.setSeverity(FacesMessage.SEVERITY_INFO);
+				} else {
+					msg.setDetail("Grupo ja foi sorteado");
+					msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+				}
 			} else {
 				msg.setDetail("Você não é administrador do grupo para realizar o sorteio");
 				msg.setSeverity(FacesMessage.SEVERITY_ERROR);
@@ -162,7 +170,6 @@ public class GruposBean {
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 		}
 		context.addMessage(null, msg);
-		
 	}
 	
 	public void pesquisarSorteado(){
